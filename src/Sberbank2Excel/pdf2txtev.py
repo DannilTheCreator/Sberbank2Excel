@@ -27,7 +27,6 @@ from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
-from pdfminer.utils import open_filename
 from pdfminer.layout import LTTextBoxHorizontal
 
 
@@ -52,9 +51,9 @@ def _list_LTTextBoxHorizontal_2_matrix(list_LTTextBoxHorizontal:List[LTTextBoxHo
     if len(list_LTTextBoxHorizontal) == 1:
         return matrix
 
-    """ 
-    If the LTTextBoxHorizontal top side (y1) is higher then the vertical middle of the previous 
-    LTTextBoxHorizontal ([i-1]), then both current and previous LTTextBoxHorizontal are considered to be on the same 
+    """
+    If the LTTextBoxHorizontal top side (y1) is higher then the vertical middle of the previous
+    LTTextBoxHorizontal ([i-1]), then both current and previous LTTextBoxHorizontal are considered to be on the same
     line/ row. In this case current LTTextBoxHorizontal element is added as the next element of the current row
     Otherwise current LTTextBoxHorizontal is added to a new line / row of the matrix
     """
@@ -100,7 +99,7 @@ def _PDFpage2txt(page:PDFPage, laparams = None) -> str:
     Converting PDFPage to text
     """
     if laparams is None:
-        laparams = LAParams(char_margin=0.001, line_margin=0.001, boxes_flow=None)
+        laparams = LAParams(char_margin=0.001, line_margin=0.001, boxes_flow=0.0)
 
     # Some preparations to get layout
     resource_manager = PDFResourceManager()
@@ -136,7 +135,7 @@ def pdf_2_text(pdf_file_name: str,
     :
     """
     result = ""
-    with open_filename(pdf_file_name, "rb") as pdf_file_object:
+    with open(pdf_file_name, "rb") as pdf_file_object:
         for page in PDFPage.get_pages(pdf_file_object,
                                       page_numbers,
                                       maxpages=maxpages,

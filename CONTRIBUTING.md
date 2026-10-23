@@ -22,7 +22,7 @@
 
 ## Установка для разработки
 
-### Установить python 
+### Установить python
 
 #### Windows
 
@@ -45,8 +45,8 @@ sudo apt-get install python3.12-dev
 ### Установить исходный код
 
 Склонировать исходный код с github и перейти в созданную при этом директорию
-``` 
-git clone https://github.com/Ev2geny/Sberbank2Excel.git 
+```
+git clone https://github.com/Ev2geny/Sberbank2Excel.git
 cd Sberbank2Excel
 ```
 
@@ -78,7 +78,7 @@ python -m pip install -e .[dev]
 
 ### Проверить установку
 
-Запустить тесты.  
+Запустить тесты.
 Режим "not private" избегает запускать тесты, промаркированные как `private`. Это те тесты, для работы которых требуется
 приватные варианты выписок, недоступные в исходном коде (а таких - большинство)
 ```
@@ -94,9 +94,9 @@ python -m Sberbank2Excel.sberbank2Excel
 
 Запустить `sberbank2Excel` из командной строки и убедиться, что он запускается в режиме графического интерфейса
 
-Прим.: запускаемый файл `sberbank2Excel` (`sberbank2Excel.exe` Windows) должен был быть создан установке пакета 
+Прим.: запускаемый файл `sberbank2Excel` (`sberbank2Excel.exe` Windows) должен был быть создан установке пакета
 при помощи pip (см. выше), но это не полноценный .exe файл, создаваемый при помощи утилиты `pyinstaller`
-  
+
 ```
 sberbank2Excel
 ```
@@ -112,7 +112,7 @@ sberbank2Excel -h
 ### Создать новую ветку git
 
 
-Если в планах сделать [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) то создайте новую ветку git.   
+Если в планах сделать [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) то создайте новую ветку git.
 Например:
 
 ```
@@ -137,8 +137,8 @@ Sberbank2Excel имеет модульную конструкцию, где дл
 
 Проще всего скопировать один из существующих экстракторов (лучше наиболее близкий к тому, который вы хотите создать) и изменить код так, чтобы он соответствовал бы новому типу выписки.
 
-Для облегчения разработки модули экстракторов содержат код для самотестирования, который работает, когда [модуль запускается в качестве основной программы](https://coderoad.ru/419163/%D0%A7%D1%82%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D1%82-if-__name__-__main__-do)  
-```py 
+Для облегчения разработки модули экстракторов содержат код для самотестирования, который работает, когда [модуль запускается в качестве основной программы](https://coderoad.ru/419163/%D0%A7%D1%82%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D1%82-if-__name__-__main__-do)
+```py
 if __name__ == '__main__':
 ```
 

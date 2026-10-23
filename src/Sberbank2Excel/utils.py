@@ -23,15 +23,20 @@ def get_decimal_from_money(money_str: str, process_no_sign_as_negative=False) ->
     Example:
     get_decimal_from_money('1 189,40', True) -> -1189.4
     """
-    
-    money_str = unidecode.unidecode(money_str)
-    # избавляемся от пробелов
+
+    # Удаляем символы валют в начале (например ₽, $, €)
+    money_str = money_str.strip()
+    money_str = re.sub(r'[^\d+\-,. ]', '', money_str)
+
+    # Удаляем переносы строк
+    money_str = money_str.replace('\n','').replace('\r','')
+    # Удаляем пробелы
     money_str = money_str.replace(' ','')
-    # заменяем запятую на точку
+    # Заменяем запятую на точку
     money_str = money_str.replace(',','.')
 
     leading_plus = False
-    if money_str[0] == '+':
+    if len(money_str) > 0 and money_str[0] == '+':
         leading_plus = True
 
     money_decimal = Decimal(money_str)
@@ -68,14 +73,14 @@ def check_transactions_balance(input_pd: pd.DataFrame, balance: Decimal, column_
     calculated_balance = input_pd[column_name_for_balance_calculation].sum()
     if balance-calculated_balance:
         raise exceptions.BalanceVerificationError(f"""
-            Ошибка проверки балланса по трансакциям: 
+            Ошибка проверки балланса по трансакциям:
                 Вычисленный баланс по информации в шапке выписки = {balance}
                 Вычисленный баланс по всем трансакциям = {calculated_balance}
         """)
 
-def write_df_to_file(df:pd.DataFrame, 
-                        filename_stem:str, 
-                        extractor_name:str, 
+def write_df_to_file(df:pd.DataFrame,
+                        filename_stem:str,
+                        extractor_name:str,
                         errors:str="",
                         output_file_format:str="xlsx")->None:
     """
@@ -137,18 +142,18 @@ def conv_decimals_in_df_to_floats(df: pd.DataFrame) -> pd.DataFrame:
     Converts all Decimal values in pandas dataframe to float
     """
     df = df.map(dec_to_float)
-    
+
     return df
 
 def main():
     print('this module is not designed to work standalone')
-    
+
 if __name__=='__main__':
     main()
-    
-        
-    
-    
-    
+
+
+
+
+
 
 
